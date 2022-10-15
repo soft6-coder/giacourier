@@ -16,7 +16,7 @@ function getShipments(shipmentStage) {
   let shipmentsXhr = new XMLHttpRequest();
   shipmentsXhr.open(
     "GET",
-    `http://127.0.0.1/shipment/stage/${shipmentStage}`,
+    `http://127.0.1/shipment/stage/${shipmentStage}`,
     true
   );
   shipmentsXhr.send();

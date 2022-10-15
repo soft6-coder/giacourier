@@ -15,6 +15,7 @@ public class HistoryController {
 	@Autowired
 	private HistoryService historyService;
 	
+	@CrossOrigin(maxAge = 3600)
 	@RequestMapping(method = RequestMethod.POST, value = "/history")
 	public History addHistory(@RequestBody History history) {
 		return historyService.addHistory(history);

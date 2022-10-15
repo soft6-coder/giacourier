@@ -40,6 +40,8 @@ public class Shipment {
 	private String receiverPhone;
 	private String receiverEmail;
 
+	
+	
 	public String getShipmentId() {
 		return shipmentId;
 	}

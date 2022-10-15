@@ -40,4 +40,25 @@ document.addEventListener("click", function (e) {
       document.getElementById("edit-pins").value
     }`;
   }
+  else if(targetId == "sign-in") {
+    signIn();
+  }
 });
+
+function signIn() {
+  let userName = document.getElementById("edit-username").value;
+  let password = document.getElementById("edit-password").value;
+  console.log(userName, password)
+  let signInXhr = new XMLHttpRequest();
+  signInXhr.open("GET", `http://127.0.0.1/user/${userName}/${password}`, true);
+  signInXhr.send();
+
+  signInXhr.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      let response = JSON.parse(this.response);
+      if (response != null) {
+        location.replace("/admin.html");
+      }
+    }
+  }
+}

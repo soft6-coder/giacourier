@@ -1,11 +1,7 @@
-let shipmentId = new URLSearchParams(window.location.search).get(
-  "shipmentid"
-);
+let shipmentId = new URLSearchParams(window.location.search).get("shipmentid");
 let orderStages = document.querySelectorAll(".order-stage");
 
 getShipment(shipmentId);
-
-
 
 function getShipment(shipmentId) {
   let shipmentXhr = new XMLHttpRequest();
@@ -40,11 +36,10 @@ function getShipment(shipmentId) {
         response.receiverEmail;
       document.getElementById("mode").textContent = response.shipmentMode;
       document.getElementById("package").textContent = response.shipmentPackage;
-      // document.getElementById("reference-code").textContent = response.senderName;
+      document.getElementById("reference-code").textContent = response.referenceCode;
       document.getElementById("weight").textContent = response.weight;
       document.getElementById("service-type").textContent =
         response.serviceType;
-      // console.log(response)
 
       let shipmentStage;
       if (response.shipmentStage.shipmentStageId == 1) {
@@ -126,7 +121,6 @@ function bindHistories(history) {
               </div>
             </div>`;
 }
-
 
 function changeStage(selectedStage) {
   for (let i = 0; i < orderStages.length; i++) {

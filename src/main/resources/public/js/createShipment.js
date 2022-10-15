@@ -8,10 +8,12 @@ if (hasShipmentId) {
     "shipmentid"
   );
   getCountries(shipmentId);
+  
 } else {
   document.getElementById("update-container").style.display = "none";
   document.getElementById("add-container").style.display = "block";
   getCountries2();
+  getStatuses2();
 }
 
 let countries = [];
@@ -52,7 +54,49 @@ function getCountries2() {
         );
       });
 
+      countries.forEach(function (country) {
+        document.getElementById("history-location").innerHTML += bindCountries(
+          country,
+          ""
+        );
+      });
+
       stopSpinner();
+    }
+  };
+}
+
+function getStatuses(shipmentStatusId) {
+  console.log("Shipment Status", shipmentStatusId)
+  let statusesXhr = new XMLHttpRequest();
+  statusesXhr.open("GET", `http://127.0.0.1/shipmentstatuses`, true);
+  statusesXhr.send();
+
+  statusesXhr.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let response = JSON.parse(this.response);
+      response.forEach(function(status) {
+        let selected = "";
+        if (status.shipmentStatusId == shipmentStatusId) {
+          selected = "selected";
+        }
+        document.getElementById("status").innerHTML += bindStatus(status, selected)
+      })
+    }
+  };
+}
+
+function getStatuses2() {
+  let statusesXhr = new XMLHttpRequest();
+  statusesXhr.open("GET", `http://127.0.0.1/shipmentstatuses`, true);
+  statusesXhr.send();
+
+  statusesXhr.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let response = JSON.parse(this.response);
+      response.forEach(function(status) {
+        document.getElementById("status").innerHTML += bindStatus(status, "")
+      })
     }
   };
 }
@@ -82,10 +126,12 @@ function getShipmentHistory(shipmentId) {
   shipmentHistoryXhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       let response = JSON.parse(this.response);
-      response.forEach(function (history) {
-        document.getElementById("histories-root").innerHTML +=
-          bindHistories(history);
-      });
+      if (response.length > 0) {
+        response.forEach(function (history) {
+          document.getElementById("histories-root").innerHTML +=
+            bindHistories(history);
+        });
+      }
     }
   };
 }
@@ -98,9 +144,8 @@ function getShipment(shipmentId) {
   shipmentXhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       let response = JSON.parse(this.response);
+      getStatuses(response.shipmentStatus.shipmentStatusId);
       document.getElementById("tracking-id").textContent = response.shipmentId;
-      document.getElementById("status").textContent =
-        response.shipmentStatus.shipmentStatus;
       let shipmentStage;
       if (response.shipmentStage.shipmentStageId == 1) {
         shipmentStage = "received";
@@ -138,6 +183,12 @@ function getShipment(shipmentId) {
           selected
         );
       });
+      countries.forEach(function (country) {
+        document.getElementById("history-location").innerHTML += bindCountries(
+          country,
+          ""
+        );
+      });
 
       countries.forEach(function (country) {
         let selected = "";
@@ -168,7 +219,8 @@ function getShipment(shipmentId) {
       document.getElementById("package").value = response.shipmentPackage;
       document.getElementById("reference-code").value = response.referenceCode;
       document.getElementById("weight").value = response.weight;
-      document.getElementById("service-type").value = response.shipmentMode;
+      document.getElementById("shipment-mode").value = response.shipmentMode;
+      document.getElementById("service-type").value = response.serviceType;
 
       getShipmentHistory(shipmentId);
 
@@ -194,13 +246,69 @@ document.body.addEventListener("click", function (e) {
     closeModal("history-modal");
   } else if (target.id == "update") {
     update();
-  }
-  else if(target.id == "add-shipment") {
+  } else if (target.id == "add-shipment") {
     addShipment();
+  } else if (target.id == "add-history") {
+    addHistory();
+  } else if (target.id == "delete") {
+    deleteShipment();
   }
 });
 
+function deleteShipment() {
+  startSpinner();
+  let shipmentId = new URLSearchParams(window.location.search).get(
+    "shipmentid"
+  );
+  let deleteShipmentXhr = new XMLHttpRequest();
+  deleteShipmentXhr.open(
+    "DELETE",
+    `http://127.0.0.1/shipment/${shipmentId}/delete`,
+    true
+  );
+  deleteShipmentXhr.send();
+
+  deleteShipmentXhr.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      location.href = "/admin.html";
+    }
+  };
+}
+
+function addHistory() {
+  startSpinner();
+  let shipmentId = new URLSearchParams(window.location.search).get(
+    "shipmentid"
+  );
+  let historyDate = document.getElementById("history-date").value;
+  let historyTime = document.getElementById("history-time").value;
+  let historyLocation = document.getElementById("history-location").value;
+  let historyActivity = document.getElementById("history-activity").value;
+  let history = {
+    shipment: { shipmentId: shipmentId },
+    date: historyDate,
+    time: historyTime,
+    country: { countryId: historyLocation },
+    activity: historyActivity,
+  };
+
+  // console.log(history);
+
+  let historyXhr = new XMLHttpRequest();
+  historyXhr.open("POST", "http://127.0.0.1/history", true);
+  historyXhr.setRequestHeader("Content-type", "application/json");
+  historyXhr.send(JSON.stringify(history));
+
+  historyXhr.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      let response = JSON.parse(this.response);
+      location.reload();
+    }
+  };
+}
+
 function addShipment() {
+  startSpinner();
   let orderStage2;
   for (let i = 0; i < orderStages.length; i++) {
     if (
@@ -222,12 +330,13 @@ function addShipment() {
   let arrivalDate = document.getElementById("arrival-date").value;
   let senderName = document.getElementById("sender-name").value;
   let trackingId = document.getElementById("tracking-id").textContent;
-  let status = document.getElementById("status").textContent;
+  let status = document.getElementById("status").value;
   let receiverPhone = document.getElementById("receiver-phone").value;
   let receiverEmail = document.getElementById("receiver-email").value;
   let package = document.getElementById("package").value;
   let referenceCode = document.getElementById("reference-code").value;
   let weight = document.getElementById("weight").value;
+  let shipmentMode = document.getElementById("shipment-mode").value;
   let serviceType = document.getElementById("service-type").value;
   let receiverName = document.getElementById("receiver-name").value;
   let receiverAddress = document.getElementById("receiver-address").value;
@@ -252,13 +361,13 @@ function addShipment() {
     shipmentPackage: package,
     referenceCode: referenceCode,
     weight: weight,
-    shipmentMode: serviceType,
+    serviceType: serviceType,
+    shipmentMode: shipmentMode,
     receiverName: receiverName,
     receiverAddress: { countryId: receiverAddress },
     shipmentDestination: { countryId: destination },
     senderAddress: { countryId: depature },
   };
-  console.log(shipment)
 
   let updateShipmentXhr = new XMLHttpRequest();
   updateShipmentXhr.open("POST", "/shipment", true);
@@ -268,12 +377,15 @@ function addShipment() {
   updateShipmentXhr.onreadystatechange = function () {
     if (this.status == 200 && this.readyState == 4) {
       let response = JSON.parse(this.response);
-      console.log("Saved", response);
+      location.replace(
+        `create-shipment.html?shipmentid=${response.shipmentId}`
+      );
     }
   };
 }
 
 function update() {
+  startSpinner();
   let orderStage2;
   for (let i = 0; i < orderStages.length; i++) {
     if (
@@ -295,12 +407,13 @@ function update() {
   let arrivalDate = document.getElementById("arrival-date").value;
   let senderName = document.getElementById("sender-name").value;
   let trackingId = document.getElementById("tracking-id").textContent;
-  let status = document.getElementById("status").textContent;
+  let status = document.getElementById("status").value;
   let receiverPhone = document.getElementById("receiver-phone").value;
   let receiverEmail = document.getElementById("receiver-email").value;
   let package = document.getElementById("package").value;
   let referenceCode = document.getElementById("reference-code").value;
   let weight = document.getElementById("weight").value;
+  let shipmentMode = document.getElementById("shipment-mode").value;
   let serviceType = document.getElementById("service-type").value;
   let receiverName = document.getElementById("receiver-name").value;
   let receiverAddress = document.getElementById("receiver-address").value;
@@ -326,12 +439,15 @@ function update() {
     shipmentPackage: package,
     referenceCode: referenceCode,
     weight: weight,
-    shipmentMode: serviceType,
+    serviceType: serviceType,
+    shipmentMode: shipmentMode,
     receiverName: receiverName,
     receiverAddress: { countryId: receiverAddress },
     shipmentDestination: { countryId: destination },
     senderAddress: { countryId: depature },
   };
+
+  console.log(shipment)
 
   let updateShipmentXhr = new XMLHttpRequest();
   updateShipmentXhr.open("PUT", "/shipment", true);
@@ -390,6 +506,13 @@ function bindCountries(country, selected) {
     `;
 }
 
+function bindStatus(shipmentStatus, selected) {
+  console.log(selected)
+  return `
+    <option value="${shipmentStatus.shipmentStatusId}" ${selected}>${shipmentStatus.shipmentStatus}</option>
+    `;
+}
+
 function bindHistories(history) {
   return `<div class="w3-row">
               <div
@@ -437,4 +560,8 @@ function bindHistories(history) {
 function stopSpinner() {
   document.getElementById("spinner").style.display = "none";
   document.getElementById("content").style.display = "block";
+}
+function startSpinner() {
+  document.getElementById("content").style.display = "none";
+  document.getElementById("spinner").style.display = "block";
 }
