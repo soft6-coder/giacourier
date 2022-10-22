@@ -1,6 +1,7 @@
 let isCounterStarted;
 let valueDisplays = document.querySelectorAll(".num");
 let interval = 1000;
+let isNavOpened;
 
 function startCounter() {
   valueDisplays.forEach(function (valueDisplay) {
@@ -39,26 +40,41 @@ document.addEventListener("click", function (e) {
     location.href = `/tracker.html?shipmentid=${
       document.getElementById("edit-pins").value
     }`;
-  }
-  else if(targetId == "sign-in") {
+  } else if (targetId == "sign-in") {
     signIn();
+  } else if (targetId == "toggle-nav") {
+    toggleNav(e.target);
   }
 });
+
+function toggleNav(target) {
+  if (isNavOpened) {
+    document.getElementById("nav-items").style.display = "none";
+    isNavOpened = false;
+    target.classList.replace("fa-times", "fa-bars");
+    target.classList.remove("w3-text-red")
+  } else {
+    document.getElementById("nav-items").style.display = "block";
+    isNavOpened = true;
+    target.classList.replace("fa-bars", "fa-times");
+    target.classList.add("w3-text-red")
+  }
+}
 
 function signIn() {
   let userName = document.getElementById("edit-username").value;
   let password = document.getElementById("edit-password").value;
-  console.log(userName, password)
+  console.log(userName, password);
   let signInXhr = new XMLHttpRequest();
   signInXhr.open("GET", `http://127.0.0.1/user/${userName}/${password}`, true);
   signInXhr.send();
 
-  signInXhr.onreadystatechange = function() {
+  signInXhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       let response = JSON.parse(this.response);
       if (response != null) {
         location.replace("/admin.html");
       }
     }
-  }
+  };
 }

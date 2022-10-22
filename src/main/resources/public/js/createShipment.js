@@ -69,7 +69,7 @@ function getCountries2() {
 function getStatuses(shipmentStatusId) {
   console.log("Shipment Status", shipmentStatusId)
   let statusesXhr = new XMLHttpRequest();
-  statusesXhr.open("GET", `http://127.0.0.1/shipmentstatuses`, true);
+  statusesXhr.open("GET", `/shipmentstatuses`, true);
   statusesXhr.send();
 
   statusesXhr.onreadystatechange = function () {
@@ -263,7 +263,7 @@ function deleteShipment() {
   let deleteShipmentXhr = new XMLHttpRequest();
   deleteShipmentXhr.open(
     "DELETE",
-    `http://127.0.0.1/shipment/${shipmentId}/delete`,
+    `/shipment/${shipmentId}/delete`,
     true
   );
   deleteShipmentXhr.send();

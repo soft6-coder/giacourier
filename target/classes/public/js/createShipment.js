@@ -8,7 +8,7 @@ if (hasShipmentId) {
     "shipmentid"
   );
   getCountries(shipmentId);
-  getStatuses();
+  
 } else {
   document.getElementById("update-container").style.display = "none";
   document.getElementById("add-container").style.display = "block";
@@ -20,7 +20,7 @@ let countries = [];
 
 function getCountries2() {
   let countriesXhr = new XMLHttpRequest();
-  countriesXhr.open("GET", "http://127.0.1/countries", true);
+  countriesXhr.open("GET", "/countries", true);
   countriesXhr.send();
 
   countriesXhr.onreadystatechange = function () {
@@ -66,15 +66,22 @@ function getCountries2() {
   };
 }
 
-function getStatuses() {
+function getStatuses(shipmentStatusId) {
+  console.log("Shipment Status", shipmentStatusId)
   let statusesXhr = new XMLHttpRequest();
-  statusesXhr.open("GET", `http://127.0.0.1/shipmentstatuses`, true);
+  statusesXhr.open("GET", `/shipmentstatuses`, true);
   statusesXhr.send();
 
   statusesXhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       let response = JSON.parse(this.response);
-      console.log("statuses", response);
+      response.forEach(function(status) {
+        let selected = "";
+        if (status.shipmentStatusId == shipmentStatusId) {
+          selected = "selected";
+        }
+        document.getElementById("status").innerHTML += bindStatus(status, selected)
+      })
     }
   };
 }
@@ -87,14 +94,16 @@ function getStatuses2() {
   statusesXhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       let response = JSON.parse(this.response);
-      console.log("statuses", response);
+      response.forEach(function(status) {
+        document.getElementById("status").innerHTML += bindStatus(status, "")
+      })
     }
   };
 }
 
 function getCountries(shipmentId) {
   let countriesXhr = new XMLHttpRequest();
-  countriesXhr.open("GET", "http://127.0.1/countries", true);
+  countriesXhr.open("GET", "/countries", true);
   countriesXhr.send();
 
   countriesXhr.onreadystatechange = function () {
@@ -109,7 +118,7 @@ function getShipmentHistory(shipmentId) {
   let shipmentHistoryXhr = new XMLHttpRequest();
   shipmentHistoryXhr.open(
     "GET",
-    `http://127.0.1/shipment/${shipmentId}/histories/`,
+    `/shipment/${shipmentId}/histories/`,
     true
   );
   shipmentHistoryXhr.send();
@@ -129,15 +138,14 @@ function getShipmentHistory(shipmentId) {
 
 function getShipment(shipmentId) {
   let shipmentXhr = new XMLHttpRequest();
-  shipmentXhr.open("GET", `http://127.0.1/shipment/${shipmentId}`, true);
+  shipmentXhr.open("GET", `/shipment/${shipmentId}`, true);
   shipmentXhr.send();
 
   shipmentXhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       let response = JSON.parse(this.response);
+      getStatuses(response.shipmentStatus.shipmentStatusId);
       document.getElementById("tracking-id").textContent = response.shipmentId;
-      document.getElementById("status").textContent =
-        response.shipmentStatus.shipmentStatus;
       let shipmentStage;
       if (response.shipmentStage.shipmentStageId == 1) {
         shipmentStage = "received";
@@ -255,7 +263,7 @@ function deleteShipment() {
   let deleteShipmentXhr = new XMLHttpRequest();
   deleteShipmentXhr.open(
     "DELETE",
-    `http://127.0.0.1/shipment/${shipmentId}/delete`,
+    `/shipment/${shipmentId}/delete`,
     true
   );
   deleteShipmentXhr.send();
@@ -322,7 +330,7 @@ function addShipment() {
   let arrivalDate = document.getElementById("arrival-date").value;
   let senderName = document.getElementById("sender-name").value;
   let trackingId = document.getElementById("tracking-id").textContent;
-  let status = document.getElementById("status").textContent;
+  let status = document.getElementById("status").value;
   let receiverPhone = document.getElementById("receiver-phone").value;
   let receiverEmail = document.getElementById("receiver-email").value;
   let package = document.getElementById("package").value;
@@ -362,7 +370,7 @@ function addShipment() {
   };
 
   let updateShipmentXhr = new XMLHttpRequest();
-  updateShipmentXhr.open("POST", "http://127.0.1/shipment", true);
+  updateShipmentXhr.open("POST", "/shipment", true);
   updateShipmentXhr.setRequestHeader("Content-type", "application/json");
   updateShipmentXhr.send(JSON.stringify(shipment));
 
@@ -399,7 +407,7 @@ function update() {
   let arrivalDate = document.getElementById("arrival-date").value;
   let senderName = document.getElementById("sender-name").value;
   let trackingId = document.getElementById("tracking-id").textContent;
-  let status = document.getElementById("status").textContent;
+  let status = document.getElementById("status").value;
   let receiverPhone = document.getElementById("receiver-phone").value;
   let receiverEmail = document.getElementById("receiver-email").value;
   let package = document.getElementById("package").value;
@@ -439,8 +447,10 @@ function update() {
     senderAddress: { countryId: depature },
   };
 
+  console.log(shipment)
+
   let updateShipmentXhr = new XMLHttpRequest();
-  updateShipmentXhr.open("PUT", "http://127.0.1/shipment", true);
+  updateShipmentXhr.open("PUT", "/shipment", true);
   updateShipmentXhr.setRequestHeader("Content-type", "application/json");
   updateShipmentXhr.send(JSON.stringify(shipment));
 
@@ -496,9 +506,10 @@ function bindCountries(country, selected) {
     `;
 }
 
-function bindStatus(shipmentStatus) {
+function bindStatus(shipmentStatus, selected) {
+  console.log(selected)
   return `
-    <option value="${shipmentStatus.shipmentStatusId}">${shipmentStatus.shipmentStatus}</option>
+    <option value="${shipmentStatus.shipmentStatusId}" ${selected}>${shipmentStatus.shipmentStatus}</option>
     `;
 }
 

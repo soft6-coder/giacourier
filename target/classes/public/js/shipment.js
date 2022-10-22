@@ -14,11 +14,7 @@ if (shipmentStage == "received") {
 
 function getShipments(shipmentStage) {
   let shipmentsXhr = new XMLHttpRequest();
-  shipmentsXhr.open(
-    "GET",
-    `http://127.0.1/shipment/stage/${shipmentStage}`,
-    true
-  );
+  shipmentsXhr.open("GET", `/shipment/stage/${shipmentStage}`, true);
   shipmentsXhr.send();
 
   shipmentsXhr.onreadystatechange = function () {

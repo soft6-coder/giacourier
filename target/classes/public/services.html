@@ -110,7 +110,7 @@
       color="#001996"
     />
     <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.css" />
-    <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="./css/w3.css">
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="theme-color" content="#ffffff" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -127,159 +127,96 @@
     <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
       <div class="page">
         <header>
-          <a href="#main-content" class="visually-hidden focusable">
-            Skip to main content
-          </a>
-
-          <div
-            class="header-top navbar-expand-lg d-flex bg-white shadow py-2 py-lg-1 col-12 container"
-          >
-            <div
-              class="region region--navbar-branding col-6 col-lg-2 d-flex align-items-center"
-            >
-              <div class="block block--purolator-theme-branding" style="padding: 10px 0px;">
-                <a
-                  href="/"
-                  class="navbar-brand d-flex align-items-center mr-0 p-0"
-                  aria-label="GIACourier"
-                >
-                  <img
-                    src="/images/logo.png"
-                    width="144"
-                    height="auto"
-                    alt="GIACourier logo"
-                  />
-
-                  <span class="invisible position-absolute">GIACourier</span>
-                </a>
+          <div class="w3-top" style="z-index: 10;">
+            <div class="w3-bar w3-white" style="padding: 8px 10px 8px 0px">
+              <div class="w3-bar-item">
+                <img src="./images/logo.png" alt="" style="width: 50%" />
+              </div>
+              <div class="w3-bar-item w3-right">
+                <i
+                  id="toggle-nav"
+                  class="fa fa-bars"
+                  style="font-size: 25px; margin-top: 4px"
+                ></i>
               </div>
             </div>
 
-            <div
-              class="region region--navbar-actions d-flex align-items-center col-6 col-lg-10 justify-content-end py-2"
-            >
-              
-
-              <button
-                class="navbar-toggler p-0"
-                type="button"
-                data-toggle="collapse"
-                data-target=".navbar-collapse"
-                aria-controls="navbar-collapse"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span
-                  class="navbar-toggler-icon d-flex align-items-center navbar-menu-open"
-                >
-                  <span class="fa fa-bars mx-auto"></span>
-                </span>
-                <span
-                  class="navbar-toggler-icon d-flex align-items-center navbar-menu-close"
-                >
-                  <span class="fa fa-times mx-auto"></span>
-                </span>
-              </button>
-            </div>
-          </div>
-
-          <div
-            class="header-bottom navbar-expand-lg collapse navbar-collapse bg-white shadow show container d-flex"
-          >
-            <div class="col-1">
-              <a href="/en" class="logo-small d-none" aria-label="GIACourier">
-                <img
-                  src="/images/logo-small.png"
-                  alt="GIACourier logo"
-                />
-
-                <span class="invisible position-absolute">GIACourier</span>
-              </a>
-            </div>
-            <div
-              class="col-12 col-lg-10 d-flex flex-column flex-lg-row px-0 position-static"
-            >
-              <div class="region region--navbar-left col-lg-11 position-static">
-                <div
-                  class="block block--purolator-theme-main-menu position-static"
-                >
-                  <nav aria-label="Main Menu">
-                    <ul
-                      data-region="navbar_left"
-                      class="nav justify-content-between navbar-nav"
-                    >
-                    <li class="nav-item mx-lg-1">
-                      <div class="m-0">
-                        <a
-                          href="/"
-                          class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
-                        >
-                          Home
-                        </a>
-                      </div>
-                    </li>
-                      <li class="nav-item mx-lg-1">
-                        <div class="m-0">
-                          <a
-                            href="./shipping.html"
-                            class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
-                          >
-                            Shipping
-                          </a>
-                        </div>
-                      </li>
-                      <li class="nav-item mx-lg-1">
-                        <div class="m-0">
-                          <a
-                            href="./freight.html"
-                            class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
-                          >
-                            Freight
-                          </a>
-                        </div>
-                      </li>
-                      <li class="nav-item mx-lg-1">
-                        <div class="m-0">
-                          <a
-                            href="./business-solutions.html"
-                            class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
-                          >
-                            Business Solutions
-                          </a>
-                        </div>
-                      </li>
-                      <li class="nav-item mx-lg-1">
-                        <div class="m-0">
-                          <a
-                            href="./services.html"
-                            class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
-                          >
-                            Services
-                          </a>
-                        </div>
-                      </li>
-                      <li class="nav-item mx-lg-1">
-                        <div class="m-0">
-                          <a
-                            href="./about.html"
-                            class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
-                          >
-                            About
-                          </a>
-                        </div>
-                      </li>
-                      <li class="nav-item mx-lg-1">
-                        <div class="m-0">
-                          <a
-                            href="./contact-us.html"
-                            class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
-                          >
-                            Contact us
-                          </a>
-                        </div>
-                      </li>
-                    </ul>
-                  </nav>
+            <div id="nav-items" class="w3-animate-right w3-white" style="height: 100vh; font-size: 18px; padding: 0px 16px; display: none;">
+              <div class="nav-item mx-lg-1">
+                <div class="m-0">
+                  <a
+                    href="/"
+                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
+                    style="color: rgb(61, 61, 230);"
+                  >
+                    Home
+                  </a>
+                </div>
+              </div>
+              <div class="nav-item mx-lg-1">
+                <div class="m-0">
+                  <a
+                    href="./shipping.html"
+                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
+                    style="color: rgb(61, 61, 230);"
+                  >
+                    Shipping
+                  </a>
+                </div>
+              </div>
+              <div class="nav-item mx-lg-1">
+                <div class="m-0">
+                  <a
+                    href="./freight.html"
+                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
+                    style="color: rgb(61, 61, 230);"
+                  >
+                    Freight
+                  </a>
+                </div>
+              </div>
+              <div class="nav-item mx-lg-1">
+                <div class="m-0">
+                  <a
+                    href="./business-solutions.html"
+                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
+                    style="color: rgb(61, 61, 230);"
+                  >
+                    Business Solutions
+                  </a>
+                </div>
+              </div>
+              <div class="nav-item mx-lg-1">
+                <div class="m-0">
+                  <a
+                    href="./services.html"
+                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
+                    style="color: rgb(61, 61, 230);"
+                  >
+                    Services
+                  </a>
+                </div>
+              </div>
+              <div class="nav-item mx-lg-1">
+                <div class="m-0">
+                  <a
+                    href="./about.html"
+                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
+                    style="color: rgb(61, 61, 230);"
+                  >
+                    About
+                  </a>
+                </div>
+              </div>
+              <div class="nav-item mx-lg-1">
+                <div class="m-0">
+                  <a
+                    href="./contact-us.html"
+                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
+                    style="color: rgb(61, 61, 230);"
+                  >
+                    Contact us
+                  </a>
                 </div>
               </div>
             </div>
@@ -907,6 +844,7 @@
         }
       }
     </script>
+    <script src="./js/index.js"></script>
     <script src="/core/assets/vendor/jquery/jquery.min.js?v=3.6.0"></script>
     <script src="/core/misc/polyfills/element.matches.js?v=9.3.20"></script>
     <script src="/core/assets/vendor/once/once.min.js?v=1.0.1"></script>
