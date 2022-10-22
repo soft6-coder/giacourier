@@ -67,7 +67,6 @@ function getCountries2() {
 }
 
 function getStatuses(shipmentStatusId) {
-  console.log("Shipment Status", shipmentStatusId)
   let statusesXhr = new XMLHttpRequest();
   statusesXhr.open("GET", `/shipmentstatuses`, true);
   statusesXhr.send();
@@ -88,7 +87,7 @@ function getStatuses(shipmentStatusId) {
 
 function getStatuses2() {
   let statusesXhr = new XMLHttpRequest();
-  statusesXhr.open("GET", `http://127.0.0.1/shipmentstatuses`, true);
+  statusesXhr.open("GET", `/shipmentstatuses`, true);
   statusesXhr.send();
 
   statusesXhr.onreadystatechange = function () {
@@ -226,7 +225,7 @@ function getShipment(shipmentId) {
 
       setTimeout(function () {
         stopSpinner();
-      }, 1000);
+      }, 100);
     }
   };
 }
@@ -295,7 +294,7 @@ function addHistory() {
   // console.log(history);
 
   let historyXhr = new XMLHttpRequest();
-  historyXhr.open("POST", "http://127.0.0.1/history", true);
+  historyXhr.open("POST", "/history", true);
   historyXhr.setRequestHeader("Content-type", "application/json");
   historyXhr.send(JSON.stringify(history));
 
@@ -447,12 +446,12 @@ function update() {
     senderAddress: { countryId: depature },
   };
 
-  console.log(shipment)
+  console.log("Shipment-status", status)
 
   let updateShipmentXhr = new XMLHttpRequest();
   updateShipmentXhr.open("PUT", "/shipment", true);
   updateShipmentXhr.setRequestHeader("Content-type", "application/json");
-  updateShipmentXhr.send(JSON.stringify(shipment));
+  // updateShipmentXhr.send(JSON.stringify(shipment));
 
   updateShipmentXhr.onreadystatechange = function () {
     if (this.status == 200 && this.readyState == 4) {
@@ -507,7 +506,6 @@ function bindCountries(country, selected) {
 }
 
 function bindStatus(shipmentStatus, selected) {
-  console.log(selected)
   return `
     <option value="${shipmentStatus.shipmentStatusId}" ${selected}>${shipmentStatus.shipmentStatus}</option>
     `;

@@ -31,7 +31,7 @@ function getShipments(shipmentStage) {
       }
       setTimeout(function () {
         stopSpinner();
-      }, 1000);
+      }, 100);
     }
   };
 }

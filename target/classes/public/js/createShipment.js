@@ -226,7 +226,7 @@ function getShipment(shipmentId) {
 
       setTimeout(function () {
         stopSpinner();
-      }, 1000);
+      }, 100);
     }
   };
 }

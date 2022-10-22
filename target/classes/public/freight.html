@@ -56,7 +56,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="icon"
-      href="/themes/custom/purolator_theme/favicon.ico"
+      href="./images/logo.png"
       type="image/vnd.microsoft.icon"
     />
     <link
@@ -115,6 +115,7 @@
       href="/themes/custom/purolator_theme/src/img/favicons/safari-pinned-tab.svg"
       color="#001996"
     />
+    <link rel="stylesheet" href="./css/color.css">
     <link rel="stylesheet" href="./css/w3.css">
     <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.css" />
     <meta name="msapplication-TileColor" content="#ffffff" />
@@ -876,10 +877,10 @@
     <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas>
       <div class="page">
         <header>
-          <div class="w3-top" style="z-index: 10;">
+          <div class="w3-top" style="z-index: 10">
             <div class="w3-bar w3-white" style="padding: 8px 10px 8px 0px">
-              <div class="w3-bar-item">
-                <img src="./images/logo.png" alt="" style="width: 50%" />
+              <div class="w3-bar-item" style="width: 50%">
+                <img src="./images/logo.png" alt="" style="width: 100%" />
               </div>
               <div class="w3-bar-item w3-right">
                 <i
@@ -890,13 +891,21 @@
               </div>
             </div>
 
-            <div id="nav-items" class="w3-animate-right w3-white" style="height: 100vh; font-size: 18px; padding: 0px 16px; display: none;">
+            <div
+              id="nav-items"
+              class="w3-animate-right w3-white"
+              style="
+                height: 100vh;
+                font-size: 18px;
+                padding: 0px 16px;
+                display: none;
+              "
+            >
               <div class="nav-item mx-lg-1">
                 <div class="m-0">
                   <a
                     href="/"
-                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
-                    style="color: rgb(61, 61, 230);"
+                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block text-primary"
                   >
                     Home
                   </a>
@@ -906,8 +915,7 @@
                 <div class="m-0">
                   <a
                     href="./shipping.html"
-                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
-                    style="color: rgb(61, 61, 230);"
+                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block text-primary"
                   >
                     Shipping
                   </a>
@@ -917,8 +925,7 @@
                 <div class="m-0">
                   <a
                     href="./freight.html"
-                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
-                    style="color: rgb(61, 61, 230);"
+                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block text-primary"
                   >
                     Freight
                   </a>
@@ -928,8 +935,7 @@
                 <div class="m-0">
                   <a
                     href="./business-solutions.html"
-                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
-                    style="color: rgb(61, 61, 230);"
+                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block text-primary"
                   >
                     Business Solutions
                   </a>
@@ -939,8 +945,7 @@
                 <div class="m-0">
                   <a
                     href="./services.html"
-                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
-                    style="color: rgb(61, 61, 230);"
+                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block text-primary"
                   >
                     Services
                   </a>
@@ -950,8 +955,7 @@
                 <div class="m-0">
                   <a
                     href="./about.html"
-                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
-                    style="color: rgb(61, 61, 230);"
+                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block text-primary"
                   >
                     About
                   </a>
@@ -961,8 +965,7 @@
                 <div class="m-0">
                   <a
                     href="./contact-us.html"
-                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block"
-                    style="color: rgb(61, 61, 230);"
+                    class="nav-link p-lg-0 pb-lg-3 m-lg-0 mt-lg-3 d-flex d-lg-block text-primary"
                   >
                     Contact us
                   </a>
@@ -3589,8 +3592,8 @@
               </div>
             </div>
 
-            <div class="container">
-              <div class="row row-2 d-flex flex-wrap pb-5 no-gutters">
+            <div>
+              <div class="row row-2 d-flex flex-wrap no-gutters">
                 <div class="region region--content-footer-3 col-12 col-md-9">
                   <div
                     class="block block--purolator-theme-footer-one-menu position-static"
@@ -3617,7 +3620,7 @@
                                   >Community &amp; Environment</a
                                 >
                               </li>
-                             
+
                               <li>
                                 <a
                                   href="./about.html"
@@ -3656,12 +3659,66 @@
                                   >Holiday &amp; Peak Planning</a
                                 >
                               </li>
-
-                              
-                             
                             </ul>
                           </div>
                         </li>
+                        
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div
+                    class="block block--basic block--footer-logo brick brick--basic"
+                  >
+                    <div class="basic__body">
+                      <article
+                        data-embed-button="media"
+                        data-entity-embed-display="view_mode:media.inline"
+                        data-entity-type="media"
+                        data-entity-uuid="7c3c1df5-dbb4-4524-a93d-5883fc834fe7"
+                        data-langcode="en"
+                        class="embedded-entity"
+                      >
+                        <div>
+                          <div class="image__field-media-image"></div>
+                        </div>
+                      </article>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row row-2 d-flex flex-wrap no-gutters">
+                <div class="region region--content-footer-3 col-12 col-md-9">
+                  <div
+                    class="block block--purolator-theme-footer-one-menu position-static"
+                  >
+                    <div class="no-gutters">
+                      <ul class="col-12 d-flex no-bullets">
+                        <li class="menu-col col-12">
+                          <div class="menu-col-container">
+                            <h3 class="h6 font-weight-light mb-3">
+                              GIACourier Contacts
+                            </h3>
+                            <ul class="no-bullets m-0 p-0">
+                              <li>
+                               <i class="fa fa-phone text-primary w3-padding-small" style="font-size: 20px;"></i>+44 7448 330555
+                              </li>
+                              <li>
+                                <i class="fa fa-map-marker text-primary w3-padding-small" style="font-size: 20px;"></i>7 Canary Wharf Road,
+                                London, England
+                              </li>
+
+                              <li>
+                                <i class="fa fa-envelope text-primary w3-padding-small" style="font-size: 16px;"></i>info@giacourier.com
+                              </li>
+                              <li>
+                                <i class="fa fa-clock-o text-primary w3-padding-small" style="font-size: 20px;"></i>Mon - Sat: 9:00 - 18:00
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                        
+                        
                       </ul>
                     </div>
                   </div>

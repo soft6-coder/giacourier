@@ -34,7 +34,7 @@ function getShipmentCount() {
 
             setTimeout(function() {
                 stopSpinner();
-            }, 1000)
+            }, 100)
         }
     }
 }
