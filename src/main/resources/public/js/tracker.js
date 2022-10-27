@@ -29,7 +29,7 @@ function getShipment(shipmentId) {
       document.getElementById("receiver-name").textContent =
         response.receiverName;
       document.getElementById("receiver-address").textContent =
-        response.receiverAddress.countryName;
+        response.receiverAddress;
       document.getElementById("receiver-phone-number").textContent =
         response.receiverPhone;
       document.getElementById("receiver-email").textContent =
