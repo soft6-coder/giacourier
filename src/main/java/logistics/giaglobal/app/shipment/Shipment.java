@@ -35,8 +35,7 @@ public class Shipment {
 	@OneToOne
 	private Country shipmentDestination;
 	private String receiverName;
-	@OneToOne
-	private Country receiverAddress;
+	private String receiverAddress;
 	private String receiverPhone;
 	private String receiverEmail;
 
@@ -164,13 +163,19 @@ public class Shipment {
 		this.receiverName = receiverName;
 	}
 
-	public Country getReceiverAddress() {
+	
+
+	public String getReceiverAddress() {
 		return receiverAddress;
 	}
 
-	public void setReceiverAddress(Country receiverAddress) {
+
+
+	public void setReceiverAddress(String receiverAddress) {
 		this.receiverAddress = receiverAddress;
 	}
+
+
 
 	public String getReceiverPhone() {
 		return receiverPhone;
@@ -187,6 +192,8 @@ public class Shipment {
 	public void setReceiverEmail(String receiverEmail) {
 		this.receiverEmail = receiverEmail;
 	}
+	
+	
 	
 	
 
