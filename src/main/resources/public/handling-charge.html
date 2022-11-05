@@ -210,8 +210,11 @@
       </div>
     </div>
   </section>
-  <section id="receipt" style="margin-top: 60px; display: none">
-    <div id="pdf">
+  <section id="receipt" style="margin-top: 60px; display: none;">
+    <div id="pdf" style="position: relative;">
+      <div id="not-paid" class="w3-center" style="position: absolute; top: 250px; z-index: 10; width: 100%;">
+        <p style="font-size: 80px; font-weight: 600; color: rgba(49, 49, 49, 0.466); transform: rotate(317deg);">PAID</p>
+      </div>
       <div class="text-grey-2"
         style="background-color: rgb(214, 233, 255);padding: 32px; position: relative;">
         <div style="position: absolute; top: 10px; width: 90%;"><p class="w3-right small">No<span>00742361</span></p></div>
@@ -277,6 +280,7 @@
           <div class="w3-row" style="margin-top: 48px;">
             <div class="w3-col s8">
               <div class="w3-center" style="width: 60%; position: relative;">
+                <img src="./images/approved.png" alt="" style="width: 50%; position: absolute; top: -50px; left: 50px;">
                 <img src="./images/kindpng_2750057.png" alt="" style="width: 30%;">
                 <div style="border-bottom: 1px solid rgb(77, 77, 77);">
                 </div>
