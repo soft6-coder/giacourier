@@ -66,7 +66,7 @@ function signIn() {
   let password = document.getElementById("edit-password").value;
   console.log(userName, password);
   let signInXhr = new XMLHttpRequest();
-  signInXhr.open("GET", `http://127.0.0.1/user/${userName}/${password}`, true);
+  signInXhr.open("GET", `/user/${userName}/${password}`, true);
   signInXhr.send();
 
   signInXhr.onreadystatechange = function () {
