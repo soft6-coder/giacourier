@@ -104,11 +104,11 @@ function getShipmentHistory(shipmentId) {
 }
 
 function bindHistories(history) {
-  return `<div class="w3-row">
+  return `<div class="w3-row" style="border-bottom: 1px solid rgb(245, 245, 245);">
               <div
                 class="w3-col s3"
                 style="
-                  border-bottom: 1px solid rgb(245, 245, 245);
+                  
                   padding-left: 6px;
                 "
               >
@@ -118,7 +118,7 @@ function bindHistories(history) {
                 class="w3-col s3"
                 style="
                   border-right: 1px solid rgb(245, 245, 245);
-                  border-bottom: 1px solid rgb(245, 245, 245);
+                  
                   padding-left: 6px;
                 "
               >
@@ -128,7 +128,7 @@ function bindHistories(history) {
                 class="w3-col s3"
                 style="
                   border-right: 1px solid rgb(245, 245, 245);
-                  border-bottom: 1px solid rgb(245, 245, 245);
+                  
                   padding-left: 6px;
                 "
               >
@@ -138,7 +138,7 @@ function bindHistories(history) {
                 class="w3-col s3"
                 style="
                   border-right: 1px solid rgb(245, 245, 245);
-                  border-bottom: 1px solid rgb(245, 245, 245);
+                  
                   padding-left: 6px;
                 "
               >
