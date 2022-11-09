@@ -38,6 +38,8 @@ public class Shipment {
 	private String receiverAddress;
 	private String receiverPhone;
 	private String receiverEmail;
+	private String senderPhone;
+	private String senderEmail;
 
 	
 	
@@ -191,6 +193,30 @@ public class Shipment {
 
 	public void setReceiverEmail(String receiverEmail) {
 		this.receiverEmail = receiverEmail;
+	}
+
+
+
+	public String getSenderPhone() {
+		return senderPhone;
+	}
+
+
+
+	public void setSenderPhone(String senderPhone) {
+		this.senderPhone = senderPhone;
+	}
+
+
+
+	public String getSenderEmail() {
+		return senderEmail;
+	}
+
+
+
+	public void setSenderEmail(String senderEmail) {
+		this.senderEmail = senderEmail;
 	}
 	
 	

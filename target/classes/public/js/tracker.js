@@ -5,7 +5,7 @@ getShipment(shipmentId);
 
 function getShipment(shipmentId) {
   let shipmentXhr = new XMLHttpRequest();
-  shipmentXhr.open("GET", `/shipment/${shipmentId}`, true);
+  shipmentXhr.open("GET", `http://127.0.0.1/shipment/${shipmentId}`, true);
   shipmentXhr.send();
 
   shipmentXhr.onreadystatechange = function () {

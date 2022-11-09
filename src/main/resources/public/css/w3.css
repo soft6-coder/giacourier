@@ -1086,7 +1086,7 @@ a {
 }
 
 .w3-animate-fading {
-  animation: fading 10s infinite;
+  animation: fading 2s infinite;
 }
 
 @keyframes fading {

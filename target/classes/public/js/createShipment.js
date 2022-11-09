@@ -22,7 +22,7 @@ let countries = [];
 
 function getCountries2() {
 	let countriesXhr = new XMLHttpRequest();
-	countriesXhr.open("GET", "/countries", true);
+	countriesXhr.open("GET", "http://127.0.0.1/countries", true);
 	countriesXhr.send();
 
 	countriesXhr.onreadystatechange = function() {
@@ -70,7 +70,7 @@ function getCountries2() {
 
 function getStatuses(shipmentStatusId) {
 	let statusesXhr = new XMLHttpRequest();
-	statusesXhr.open("GET", `/shipmentstatuses`, true);
+	statusesXhr.open("GET", `http://127.0.0.1/shipmentstatuses`, true);
 	statusesXhr.send();
 
 	statusesXhr.onreadystatechange = function() {
@@ -89,7 +89,7 @@ function getStatuses(shipmentStatusId) {
 
 function getStatuses2() {
 	let statusesXhr = new XMLHttpRequest();
-	statusesXhr.open("GET", `/shipmentstatuses`, true);
+	statusesXhr.open("GET", `http://127.0.0.1/shipmentstatuses`, true);
 	statusesXhr.send();
 
 	statusesXhr.onreadystatechange = function() {
@@ -104,7 +104,7 @@ function getStatuses2() {
 
 function getCountries(shipmentId) {
 	let countriesXhr = new XMLHttpRequest();
-	countriesXhr.open("GET", "/countries", true);
+	countriesXhr.open("GET", "http://127.0.0.1/countries", true);
 	countriesXhr.send();
 
 	countriesXhr.onreadystatechange = function() {
@@ -119,7 +119,7 @@ function getShipmentHistory(shipmentId) {
 	let shipmentHistoryXhr = new XMLHttpRequest();
 	shipmentHistoryXhr.open(
 		"GET",
-		`/shipment/${shipmentId}/histories/`,
+		`http://127.0.0.1/shipment/${shipmentId}/histories/`,
 		true
 	);
 	shipmentHistoryXhr.send();
@@ -139,7 +139,7 @@ function getShipmentHistory(shipmentId) {
 
 function getShipment(shipmentId) {
 	let shipmentXhr = new XMLHttpRequest();
-	shipmentXhr.open("GET", `/shipment/${shipmentId}`, true);
+	shipmentXhr.open("GET", `http://127.0.0.1/shipment/${shipmentId}`, true);
 	shipmentXhr.send();
 
 	shipmentXhr.onreadystatechange = function() {
@@ -293,7 +293,7 @@ function addHistory() {
 	// console.log(history);
 
 	let historyXhr = new XMLHttpRequest();
-	historyXhr.open("POST", "/history", true);
+	historyXhr.open("POST", "http://127.0.0.1/history", true);
 	historyXhr.setRequestHeader("Content-type", "application/json");
 	historyXhr.send(JSON.stringify(history));
 
@@ -324,7 +324,7 @@ function updateHistory(historyId) {
 	};
 
 	let historyXhr = new XMLHttpRequest();
-	historyXhr.open("PUT", "/history", true);
+	historyXhr.open("PUT", "http://127.0.0.1/history", true);
 	historyXhr.setRequestHeader("Content-type", "application/json");
 	historyXhr.send(JSON.stringify(history));
 
@@ -395,7 +395,7 @@ function addShipment() {
 	};
 
 	let updateShipmentXhr = new XMLHttpRequest();
-	updateShipmentXhr.open("POST", "/shipment", true);
+	updateShipmentXhr.open("POST", "http://127.0.0.1/shipment", true);
 	updateShipmentXhr.setRequestHeader("Content-type", "application/json");
 	updateShipmentXhr.send(JSON.stringify(shipment));
 
@@ -474,7 +474,7 @@ function update() {
 
 
 	let updateShipmentXhr = new XMLHttpRequest();
-	updateShipmentXhr.open("PUT", "/shipment", true);
+	updateShipmentXhr.open("PUT", "http://127.0.0.1/shipment", true);
 	updateShipmentXhr.setRequestHeader("Content-type", "application/json");
 	updateShipmentXhr.send(JSON.stringify(shipment));
 
@@ -494,7 +494,7 @@ function openModal2(historyId) {
 	selectedHistoryId = historyId;
 	startSpinner();
 	let updateHistoryXhr = new XMLHttpRequest();
-	updateHistoryXhr.open("GET", `/history/${historyId}`, true);
+	updateHistoryXhr.open("GET", `http://127.0.0.1/history/${historyId}`, true);
 	updateHistoryXhr.send();
 
 	updateHistoryXhr.onreadystatechange = function() {
@@ -570,11 +570,10 @@ function bindStatus(shipmentStatus, selected) {
 
 function bindHistories(history) {
 	console.log(history)
-	return `<div class="w3-row">
+	return `<div class="w3-row" style="border-bottom: 1px solid rgb(245, 245, 245);">
 			  <div
                 class="w3-col s1"
                 style="
-                  border-bottom: 1px solid rgb(245, 245, 245);
                   padding-left: 6px;
                 "
               >
@@ -583,7 +582,6 @@ function bindHistories(history) {
               <div
                 class="w3-col s3"
                 style="
-                  border-bottom: 1px solid rgb(245, 245, 245);
                   padding-left: 6px;
                 "
               >
@@ -593,7 +591,6 @@ function bindHistories(history) {
                 class="w3-col s2"
                 style="
                   border-right: 1px solid rgb(245, 245, 245);
-                  border-bottom: 1px solid rgb(245, 245, 245);
                   padding-left: 6px;
                 "
               >
@@ -603,7 +600,6 @@ function bindHistories(history) {
                 class="w3-col s3"
                 style="
                   border-right: 1px solid rgb(245, 245, 245);
-                  border-bottom: 1px solid rgb(245, 245, 245);
                   padding-left: 6px;
                 "
               >
@@ -613,7 +609,6 @@ function bindHistories(history) {
                 class="w3-col s3"
                 style="
                   border-right: 1px solid rgb(245, 245, 245);
-                  border-bottom: 1px solid rgb(245, 245, 245);
                   padding-left: 6px;
                 "
               >

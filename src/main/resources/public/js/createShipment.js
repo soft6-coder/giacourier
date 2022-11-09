@@ -208,11 +208,14 @@ function getShipment(shipmentId) {
 
 			document.getElementById("receiver-phone").value = response.receiverPhone;
 			document.getElementById("receiver-email").value = response.receiverEmail;
+			document.getElementById("sender-phone").value = response.senderPhone;
+			document.getElementById("sender-email").value = response.senderEmail;
 			document.getElementById("package").value = response.shipmentPackage;
 			document.getElementById("reference-code").value = response.referenceCode;
 			document.getElementById("weight").value = response.weight;
 			document.getElementById("shipment-mode").value = response.shipmentMode;
 			document.getElementById("service-type").value = response.serviceType;
+
 
 			getShipmentHistory(shipmentId);
 
@@ -362,6 +365,8 @@ function addShipment() {
 	let status = document.getElementById("status").value;
 	let receiverPhone = document.getElementById("receiver-phone").value;
 	let receiverEmail = document.getElementById("receiver-email").value;
+	let senderPhone = document.getElementById("sender-phone").value;
+	let senderEmail = document.getElementById("sender-email").value;
 	let package = document.getElementById("package").value;
 	let referenceCode = document.getElementById("reference-code").value;
 	let weight = document.getElementById("weight").value;
@@ -383,6 +388,8 @@ function addShipment() {
 		shipmentStatus: { shipmentStatusId: status },
 		receiverPhone: receiverPhone,
 		receiverEmail: receiverEmail,
+		senderPhone: senderPhone,
+		senderEmail: senderEmail,
 		shipmentPackage: package,
 		referenceCode: referenceCode,
 		weight: weight,
@@ -435,6 +442,8 @@ function update() {
 	let status = document.getElementById("status").value;
 	let receiverPhone = document.getElementById("receiver-phone").value;
 	let receiverEmail = document.getElementById("receiver-email").value;
+	let senderPhone = document.getElementById("sender-phone").value;
+	let senderEmail = document.getElementById("sender-email").value;
 	let package = document.getElementById("package").value;
 	let referenceCode = document.getElementById("reference-code").value;
 	let weight = document.getElementById("weight").value;
@@ -461,6 +470,8 @@ function update() {
 		shipmentStatus: { shipmentStatusId: status },
 		receiverPhone: receiverPhone,
 		receiverEmail: receiverEmail,
+		senderPhone: senderPhone,
+		senderEmail: senderEmail,
 		shipmentPackage: package,
 		referenceCode: referenceCode,
 		weight: weight,
@@ -570,11 +581,10 @@ function bindStatus(shipmentStatus, selected) {
 
 function bindHistories(history) {
 	console.log(history)
-	return `<div class="w3-row">
+	return `<div class="w3-row" style="border-bottom: 1px solid rgb(245, 245, 245);">
 			  <div
                 class="w3-col s1"
                 style="
-                  border-bottom: 1px solid rgb(245, 245, 245);
                   padding-left: 6px;
                 "
               >
@@ -583,7 +593,6 @@ function bindHistories(history) {
               <div
                 class="w3-col s3"
                 style="
-                  border-bottom: 1px solid rgb(245, 245, 245);
                   padding-left: 6px;
                 "
               >
@@ -593,7 +602,6 @@ function bindHistories(history) {
                 class="w3-col s2"
                 style="
                   border-right: 1px solid rgb(245, 245, 245);
-                  border-bottom: 1px solid rgb(245, 245, 245);
                   padding-left: 6px;
                 "
               >
@@ -603,7 +611,6 @@ function bindHistories(history) {
                 class="w3-col s3"
                 style="
                   border-right: 1px solid rgb(245, 245, 245);
-                  border-bottom: 1px solid rgb(245, 245, 245);
                   padding-left: 6px;
                 "
               >
@@ -613,7 +620,6 @@ function bindHistories(history) {
                 class="w3-col s3"
                 style="
                   border-right: 1px solid rgb(245, 245, 245);
-                  border-bottom: 1px solid rgb(245, 245, 245);
                   padding-left: 6px;
                 "
               >
