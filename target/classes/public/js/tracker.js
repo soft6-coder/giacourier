@@ -5,59 +5,84 @@ getShipment(shipmentId);
 
 function getShipment(shipmentId) {
   let shipmentXhr = new XMLHttpRequest();
-  shipmentXhr.open("GET", `http://127.0.0.1/shipment/${shipmentId}`, true);
+  shipmentXhr.open("GET", `/shipment/${shipmentId}`, true);
   shipmentXhr.send();
 
   shipmentXhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       let response = JSON.parse(this.response);
 
-      document.getElementById("tracking-no").textContent = response.shipmentId;
-      document.getElementById("status").textContent =
-        response.shipmentStatus.shipmentStatus;
-      document.getElementById("depature").textContent =
-        response.senderAddress.countryName;
-      document.getElementById("shipment-date").textContent =
-        response.shipmentDate;
-      document.getElementById("arrival-date").textContent =
-        response.deliveryDate;
-      document.getElementById("sender-name").textContent = response.senderName;
-      document.getElementById("sender-address").textContent =
-        response.senderAddress.countryName;
-      document.getElementById("shipment-destination").textContent =
-        response.shipmentDestination.countryName;
-      document.getElementById("receiver-name").textContent =
-        response.receiverName;
-      document.getElementById("receiver-address").textContent =
-        response.receiverAddress;
-      document.getElementById("receiver-phone-number").textContent =
-        response.receiverPhone;
-      document.getElementById("receiver-email").textContent =
-        response.receiverEmail;
-      document.getElementById("mode").textContent = response.shipmentMode;
-      document.getElementById("package").textContent = response.shipmentPackage;
-      document.getElementById("reference-code").textContent = response.referenceCode;
-      document.getElementById("weight").textContent = response.weight;
-      document.getElementById("service-type").textContent =
-        response.serviceType;
+      if (response == null) {
+        document.getElementById("tracking-no").textContent = shipmentId;
+        document.getElementById("status").textContent = "INVALID"
+        invalidShipmentId();
+      } else {
+        if (response.senderPhone == null) {
+          document.getElementById(
+            "sender-phone-number-container"
+          ).style.display = "none";
+        }
+        if (response.senderEmail == null) {
+          document.getElementById("sender-email-container").style.display =
+            "none";
+        }
 
-      let shipmentStage;
-      if (response.shipmentStage.shipmentStageId == 1) {
-        shipmentStage = "received";
-      } else if (response.shipmentStage.shipmentStageId == 2) {
-        shipmentStage = "dispatched";
-      } else if (response.shipmentStage.shipmentStageId == 3) {
-        shipmentStage = "middle";
-      } else if (response.shipmentStage.shipmentStageId == 4) {
-        shipmentStage = "delivered";
+        document.getElementById("sender-phone-number").textContent =
+          response.senderPhone;
+        document.getElementById("sender-email").textContent =
+          response.senderEmail;
+
+        document.getElementById("tracking-no").textContent =
+          response.shipmentId;
+        document.getElementById("status").textContent =
+          response.shipmentStatus.shipmentStatus;
+        document.getElementById("depature").textContent =
+          response.senderAddress.countryName;
+        document.getElementById("shipment-date").textContent =
+          response.shipmentDate;
+        document.getElementById("arrival-date").textContent =
+          response.deliveryDate;
+        document.getElementById("sender-name").textContent =
+          response.senderName;
+        document.getElementById("sender-address").textContent =
+          response.senderAddress.countryName;
+        document.getElementById("shipment-destination").textContent =
+          response.shipmentDestination.countryName;
+        document.getElementById("receiver-name").textContent =
+          response.receiverName;
+        document.getElementById("receiver-address").textContent =
+          response.receiverAddress;
+        document.getElementById("receiver-phone-number").textContent =
+          response.receiverPhone;
+        document.getElementById("receiver-email").textContent =
+          response.receiverEmail;
+        document.getElementById("mode").textContent = response.shipmentMode;
+        document.getElementById("package").textContent =
+          response.shipmentPackage;
+        document.getElementById("reference-code").textContent =
+          response.referenceCode;
+        document.getElementById("weight").textContent = response.weight;
+        document.getElementById("service-type").textContent =
+          response.serviceType;
+
+        let shipmentStage;
+        if (response.shipmentStage.shipmentStageId == 1) {
+          shipmentStage = "received";
+        } else if (response.shipmentStage.shipmentStageId == 2) {
+          shipmentStage = "dispatched";
+        } else if (response.shipmentStage.shipmentStageId == 3) {
+          shipmentStage = "middle";
+        } else if (response.shipmentStage.shipmentStageId == 4) {
+          shipmentStage = "delivered";
+        }
+
+        changeStage(document.getElementById(shipmentStage));
+
+        getShipmentHistory(shipmentId);
+        setTimeout(function () {
+          stopSpinner();
+        }, 1000);
       }
-
-      changeStage(document.getElementById(shipmentStage));
-
-      getShipmentHistory(shipmentId);
-      setTimeout(function () {
-        stopSpinner();
-      }, 1000);
     }
   };
 }
@@ -79,11 +104,11 @@ function getShipmentHistory(shipmentId) {
 }
 
 function bindHistories(history) {
-  return `<div class="w3-row">
+  return `<div class="w3-row" style="border-bottom: 1px solid rgb(245, 245, 245);">
               <div
                 class="w3-col s3"
                 style="
-                  border-bottom: 1px solid rgb(245, 245, 245);
+                  
                   padding-left: 6px;
                 "
               >
@@ -93,7 +118,7 @@ function bindHistories(history) {
                 class="w3-col s3"
                 style="
                   border-right: 1px solid rgb(245, 245, 245);
-                  border-bottom: 1px solid rgb(245, 245, 245);
+                  
                   padding-left: 6px;
                 "
               >
@@ -103,7 +128,7 @@ function bindHistories(history) {
                 class="w3-col s3"
                 style="
                   border-right: 1px solid rgb(245, 245, 245);
-                  border-bottom: 1px solid rgb(245, 245, 245);
+                  
                   padding-left: 6px;
                 "
               >
@@ -113,7 +138,7 @@ function bindHistories(history) {
                 class="w3-col s3"
                 style="
                   border-right: 1px solid rgb(245, 245, 245);
-                  border-bottom: 1px solid rgb(245, 245, 245);
+                  
                   padding-left: 6px;
                 "
               >
@@ -141,5 +166,12 @@ function changeStage(selectedStage) {
 
 function stopSpinner() {
   document.getElementById("spinner").style.display = "none";
+  document.getElementById("content").style.display = "block";
+}
+
+function invalidShipmentId() {
+  document.getElementById("spinner").style.display = "none";
+  document.getElementById("shipment").style.display = "none";
+  document.getElementById("invalid-shipment").style.display = "block"
   document.getElementById("content").style.display = "block";
 }

@@ -175,3 +175,14 @@ function invalidShipmentId() {
   document.getElementById("invalid-shipment").style.display = "block"
   document.getElementById("content").style.display = "block";
 }
+
+
+document.body.addEventListener("click", function(e) {
+  let targetId = e.target.id;
+  if (targetId == "print") {
+    window.print();
+  }
+  else if(targetId == "logout") {
+    location.href = "./index.html"
+  }
+})

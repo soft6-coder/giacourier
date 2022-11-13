@@ -22,7 +22,7 @@ let countries = [];
 
 function getCountries2() {
 	let countriesXhr = new XMLHttpRequest();
-	countriesXhr.open("GET", "http://127.0.0.1/countries", true);
+	countriesXhr.open("GET", "/countries", true);
 	countriesXhr.send();
 
 	countriesXhr.onreadystatechange = function() {
@@ -70,7 +70,7 @@ function getCountries2() {
 
 function getStatuses(shipmentStatusId) {
 	let statusesXhr = new XMLHttpRequest();
-	statusesXhr.open("GET", `http://127.0.0.1/shipmentstatuses`, true);
+	statusesXhr.open("GET", `/shipmentstatuses`, true);
 	statusesXhr.send();
 
 	statusesXhr.onreadystatechange = function() {
@@ -89,7 +89,7 @@ function getStatuses(shipmentStatusId) {
 
 function getStatuses2() {
 	let statusesXhr = new XMLHttpRequest();
-	statusesXhr.open("GET", `http://127.0.0.1/shipmentstatuses`, true);
+	statusesXhr.open("GET", `/shipmentstatuses`, true);
 	statusesXhr.send();
 
 	statusesXhr.onreadystatechange = function() {
@@ -104,7 +104,7 @@ function getStatuses2() {
 
 function getCountries(shipmentId) {
 	let countriesXhr = new XMLHttpRequest();
-	countriesXhr.open("GET", "http://127.0.0.1/countries", true);
+	countriesXhr.open("GET", "/countries", true);
 	countriesXhr.send();
 
 	countriesXhr.onreadystatechange = function() {
@@ -119,7 +119,7 @@ function getShipmentHistory(shipmentId) {
 	let shipmentHistoryXhr = new XMLHttpRequest();
 	shipmentHistoryXhr.open(
 		"GET",
-		`http://127.0.0.1/shipment/${shipmentId}/histories/`,
+		`/shipment/${shipmentId}/histories/`,
 		true
 	);
 	shipmentHistoryXhr.send();
@@ -139,7 +139,7 @@ function getShipmentHistory(shipmentId) {
 
 function getShipment(shipmentId) {
 	let shipmentXhr = new XMLHttpRequest();
-	shipmentXhr.open("GET", `http://127.0.0.1/shipment/${shipmentId}`, true);
+	shipmentXhr.open("GET", `/shipment/${shipmentId}`, true);
 	shipmentXhr.send();
 
 	shipmentXhr.onreadystatechange = function() {
@@ -208,11 +208,14 @@ function getShipment(shipmentId) {
 
 			document.getElementById("receiver-phone").value = response.receiverPhone;
 			document.getElementById("receiver-email").value = response.receiverEmail;
+			document.getElementById("sender-phone").value = response.senderPhone;
+			document.getElementById("sender-email").value = response.senderEmail;
 			document.getElementById("package").value = response.shipmentPackage;
 			document.getElementById("reference-code").value = response.referenceCode;
 			document.getElementById("weight").value = response.weight;
 			document.getElementById("shipment-mode").value = response.shipmentMode;
 			document.getElementById("service-type").value = response.serviceType;
+
 
 			getShipmentHistory(shipmentId);
 
@@ -293,7 +296,7 @@ function addHistory() {
 	// console.log(history);
 
 	let historyXhr = new XMLHttpRequest();
-	historyXhr.open("POST", "http://127.0.0.1/history", true);
+	historyXhr.open("POST", "/history", true);
 	historyXhr.setRequestHeader("Content-type", "application/json");
 	historyXhr.send(JSON.stringify(history));
 
@@ -324,7 +327,7 @@ function updateHistory(historyId) {
 	};
 
 	let historyXhr = new XMLHttpRequest();
-	historyXhr.open("PUT", "http://127.0.0.1/history", true);
+	historyXhr.open("PUT", "/history", true);
 	historyXhr.setRequestHeader("Content-type", "application/json");
 	historyXhr.send(JSON.stringify(history));
 
@@ -362,6 +365,8 @@ function addShipment() {
 	let status = document.getElementById("status").value;
 	let receiverPhone = document.getElementById("receiver-phone").value;
 	let receiverEmail = document.getElementById("receiver-email").value;
+	let senderPhone = document.getElementById("sender-phone").value;
+	let senderEmail = document.getElementById("sender-email").value;
 	let package = document.getElementById("package").value;
 	let referenceCode = document.getElementById("reference-code").value;
 	let weight = document.getElementById("weight").value;
@@ -383,6 +388,8 @@ function addShipment() {
 		shipmentStatus: { shipmentStatusId: status },
 		receiverPhone: receiverPhone,
 		receiverEmail: receiverEmail,
+		senderPhone: senderPhone,
+		senderEmail: senderEmail,
 		shipmentPackage: package,
 		referenceCode: referenceCode,
 		weight: weight,
@@ -395,7 +402,7 @@ function addShipment() {
 	};
 
 	let updateShipmentXhr = new XMLHttpRequest();
-	updateShipmentXhr.open("POST", "http://127.0.0.1/shipment", true);
+	updateShipmentXhr.open("POST", "/shipment", true);
 	updateShipmentXhr.setRequestHeader("Content-type", "application/json");
 	updateShipmentXhr.send(JSON.stringify(shipment));
 
@@ -435,6 +442,8 @@ function update() {
 	let status = document.getElementById("status").value;
 	let receiverPhone = document.getElementById("receiver-phone").value;
 	let receiverEmail = document.getElementById("receiver-email").value;
+	let senderPhone = document.getElementById("sender-phone").value;
+	let senderEmail = document.getElementById("sender-email").value;
 	let package = document.getElementById("package").value;
 	let referenceCode = document.getElementById("reference-code").value;
 	let weight = document.getElementById("weight").value;
@@ -461,6 +470,8 @@ function update() {
 		shipmentStatus: { shipmentStatusId: status },
 		receiverPhone: receiverPhone,
 		receiverEmail: receiverEmail,
+		senderPhone: senderPhone,
+		senderEmail: senderEmail,
 		shipmentPackage: package,
 		referenceCode: referenceCode,
 		weight: weight,
@@ -474,7 +485,7 @@ function update() {
 
 
 	let updateShipmentXhr = new XMLHttpRequest();
-	updateShipmentXhr.open("PUT", "http://127.0.0.1/shipment", true);
+	updateShipmentXhr.open("PUT", "/shipment", true);
 	updateShipmentXhr.setRequestHeader("Content-type", "application/json");
 	updateShipmentXhr.send(JSON.stringify(shipment));
 
@@ -494,7 +505,7 @@ function openModal2(historyId) {
 	selectedHistoryId = historyId;
 	startSpinner();
 	let updateHistoryXhr = new XMLHttpRequest();
-	updateHistoryXhr.open("GET", `http://127.0.0.1/history/${historyId}`, true);
+	updateHistoryXhr.open("GET", `/history/${historyId}`, true);
 	updateHistoryXhr.send();
 
 	updateHistoryXhr.onreadystatechange = function() {

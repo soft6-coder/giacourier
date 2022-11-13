@@ -2,7 +2,7 @@ getShipmentCount();
 
 function getShipmentCount() {
     let shipmentXhr = new XMLHttpRequest();
-    shipmentXhr.open("GET", "http://127.0.0.1/shipments", true);
+    shipmentXhr.open("GET", "/shipments", true);
     shipmentXhr.send();
 
     shipmentXhr.onreadystatechange = function() {
